@@ -78,13 +78,15 @@ function GalaryScrollEditor() {
           return item.$id
         })
         const dataPhotos = newGalData.map((item) => {
+
           return item.photos
         })
-        const filteredVals = newGalData.map((item) => {
+
+        const filteredVals = newGalData.map((item, i) => {
 
           const newData: any = {
             mainPhoto: item.mainPhoto,
-            photos: dataPhotos[0],//item.photos
+            photos: item.photos,//item.photos
             price: Number(item.price),
             features: item.features,
             description: item.description || '',
@@ -137,7 +139,7 @@ function GalaryScrollEditor() {
                   .then((res) => {
                     const imageView = api.sdk.storage.getFileView(api.galaryImagesBucket, fileId)
                     val.mainPhoto = imageView.href
-                    console.log('1111111111111111111111111111111111111')
+
                   })
                   .catch((err) => {
                     hasErrors = true
@@ -172,9 +174,9 @@ function GalaryScrollEditor() {
                       .uploadGalaryImage(fileId, valImageFile)
                       .then((res) => {
                         const imageView = api.sdk.storage.getFileView(api.galaryImagesBucket, fileId)
-                        console.log('2222222222222222222222222222', val)
+
                         // if (imageView) 
-                        val.photos = []
+                        // val.photos = []
                         val?.photos.push(imageView.href)
                       })
                       .catch((err) => {
@@ -197,7 +199,7 @@ function GalaryScrollEditor() {
           const filteredVals = asyncVals.filter((item) =>
             item.description && item.features &&
             item.mainPhoto && item.location &&
-            item.price && item.status && item.photos &&   //
+            item.price && item.status &&  //item.photos &&  
             item.lat && item.lon
           )
           if (hasErrors) return

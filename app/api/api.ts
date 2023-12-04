@@ -231,7 +231,6 @@ class Api {
 
   async updateGalaryScroll(blockData: AnyBlock, blockId: string): Promise<GalaryScrollBlock | null> {
     let block;
-    console.log(blockData)
     if (blockId !== undefined) {
       block = await this.sdk.database.updateDocument(
         this.generalDB, this.blockHouses, blockId, JSON.stringify(blockData));
